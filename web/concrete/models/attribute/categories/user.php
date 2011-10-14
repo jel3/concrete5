@@ -132,7 +132,6 @@ class UserAttributeKey extends AttributeKey {
 		$av = $uo->getAttributeValueObject($this, true);
 		parent::saveAttribute($av, $value);
 		$db = Loader::db();
-		$v = array($uo->getUserID(), $this->getAttributeKeyID(), $av->getAttributeValueID());
 		$db->Replace('UserAttributeValues', array(
 			'uID' => $uo->getUserID(), 
 			'akID' => $this->getAttributeKeyID(), 
