@@ -72,21 +72,21 @@ if ($akSelectAllowMultipleValues && $akSelectAllowOtherValues) { // display auto
 
 	var ccmAttributeTypeSelectTagHelper<?php echo $attrKeyID?>={  
 			addButtonClick: function() {
-				if($(this).val().length > 0) {
-					var valrow = $("input[name=newAttrValueRows<?=$attrKeyID?>]");
-					ccmAttributeTypeSelectTagHelper<?php echo $attrKeyID?>.add(valrow.val());
-					valrow.val('');
-					$("#newAttrValueRows<?php echo $this->attributeKey->getAttributeKeyID()?>").autocomplete( "close" );
-				}
+				var valrow = $("input[name=newAttrValueRows<?=$attrKeyID?>]");
+				ccmAttributeTypeSelectTagHelper<?php echo $attrKeyID?>.add(valrow.val());
+				valrow.val('');
+				$("#newAttrValueRows<?php echo $this->attributeKey->getAttributeKeyID()?>").autocomplete( "close" );
 				return false;
 			},
 			add:function(value){
-				var newRow=document.createElement('div');
-				newRow.className='newAttrValue';
-				newRow.innerHTML='<input name="<?=$this->field('atSelectNewOption')?>[]" type="hidden" value="'+value+'" /> ';
-				newRow.innerHTML+=value;
-				newRow.innerHTML+=' <a onclick="ccmAttributeTypeSelectTagHelper<?php echo $attrKeyID?>.remove(this)" href="javascript:void(0)">x</a>';
-				$('#selectedAttrValueRows_<?php echo $attrKeyID;?>').append(newRow);				
+				if(value){
+					var newRow=document.createElement('div');
+					newRow.className='newAttrValue';
+					newRow.innerHTML='<input name="<?=$this->field('atSelectNewOption')?>[]" type="hidden" value="'+value+'" /> ';
+					newRow.innerHTML+=value;
+					newRow.innerHTML+=' <a onclick="ccmAttributeTypeSelectTagHelper<?php echo $attrKeyID?>.remove(this)" href="javascript:void(0)">x</a>';
+					$('#selectedAttrValueRows_<?php echo $attrKeyID;?>').append(newRow);				
+				}
 			},
 			remove:function(a){
 				$(a.parentNode).remove();			
